@@ -62,8 +62,3 @@ def _get_depth(pit):
     """Get the depth of a given pit.
     """
     return min(pit[0] - pit[1], pit[2] - pit[1])
-
-
-A = [0, 1, 3, -2, 0, 1, 0, -3, 2, 3]
-print get_maximum_pit_depth(A)
-#4
