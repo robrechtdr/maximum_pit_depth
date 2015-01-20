@@ -1,7 +1,12 @@
-def solution(A):
+# tc: O(n**4)
+# sc: O(n)
+def get_deepest_array_pit(A):
     depths = _get_pit_depths(A)
     return max(depths)
 
+
+# tc: O(n**4)
+# sc: O(n)
 def _get_pit_depths(A):
     depths = []
     for i, n in enumerate(A):
@@ -15,6 +20,8 @@ def _get_pit_depths(A):
     return depths
 
 
+# tc: O(n)
+# sc: O(1)
 def _is_pit(A, p, q, r):
     if _is_consecutively_ch("decr", A, p, q) and _is_consecutively_ch("incr", A, q, r):
         return True
@@ -22,6 +29,8 @@ def _is_pit(A, p, q, r):
         return False
 
 
+# tc: O(n)
+# sc: O(1)
 def _is_consecutively_ch(change, A, a, b):
     first = A[a]
     for n in A[a:b + 1]:
@@ -37,10 +46,12 @@ def _is_consecutively_ch(change, A, a, b):
         return True
 
 
+# tc: O(1)
+# sc: O(1)
 def _get_depth(pit):
     return min(pit[0] - pit[1], pit[2] - pit[1])
 
 
 A = [0, 1, 3, -2, 0, 1, 0, -3, 2, 3]
-print solution(A)
+print get_deepest_array_pit(A)
 #4
