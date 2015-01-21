@@ -1,31 +1,50 @@
-# tc: O(n**4)
+# tc: O(n**4)?
 # sc: O(n)
 def get_maximum_pit_depth(A):
     """Get the depth of the deepest pit.
     """
     depths = _get_pit_depths(A)
-    print depths
     if not depths:
         return -1
     else:
         return max(depths)
 
 
-# tc: O(n**4)
+# tc: O(n**4)?
 # sc: O(n)
 def _get_pit_depths(A):
     """Get the depths of all occuring pits in the array.
     """
     depths = []
-    for i, n in enumerate(A):
-        for j, o in enumerate(A):
-            for k, p in enumerate(A):
-                if i < j < k:
-                    triplet = (n, o, p)
-                    if _is_pit(A, i, j, k):
-                        print i, j, k
-                        depth = _get_depth(triplet)
-                        depths.append(depth)
+
+    i = 0
+    j = i + 1
+    k = j + 1
+    n = A[i]
+    o = A[j]
+    p = A[k]
+
+    while i < j < k:
+        triplet = (n, o, p)
+        if _is_pit(A, i, j, k):
+            depth = _get_depth(triplet)
+            depths.append(depth)
+        if n == A[-3]:
+            break
+        if p != A[-1]:
+            k += 1
+        elif o == A[-2]:
+            i += 1
+            j = i + 1
+            k = j + 1
+        elif p == A[-1]:
+            j += 1
+            k = j + 1
+
+        n = A[i]
+        o = A[j]
+        p = A[k]
+
     return depths
 
 
