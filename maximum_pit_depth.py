@@ -1,9 +1,9 @@
 # tc: O(n**4)
 # sc: O(n)
-def get_maximum_pit_depth(A):
+def get_maximum_pit_depth(array):
     """Get the depth of the deepest pit.
     """
-    depths = _get_pit_depths(A)
+    depths = _get_pit_depths(array)
     if not depths:
         return -1
     else:
@@ -12,17 +12,17 @@ def get_maximum_pit_depth(A):
 
 # tc: O(n**4)
 # sc: O(n)
-def _get_pit_depths(A):
-    """Get the depths of all occuring pits in the array.
+def _get_pit_depths(array):
+    """Get the depths of all occuring pits.
     """
     depths = []
 
-    for i, n in enumerate(A):
-        for j, o in enumerate(A):
-            for k, p in enumerate(A):
+    for i, n in enumerate(array):
+        for j, o in enumerate(array):
+            for k, p in enumerate(array):
                 if i < j < k:
                     triplet = (n, o, p)
-                    if _is_pit(A, i, j, k):
+                    if _is_pit(array, i, j, k):
                         depth = _get_depth(triplet)
                         depths.append(depth)
     return depths
@@ -30,11 +30,11 @@ def _get_pit_depths(A):
 
 # tc: O(n)
 # sc: O(1)
-def _is_pit(A, p, q, r):
+def _is_pit(array, p, q, r):
     """Check whether the triplet defined by p, q and r in the array is a pit.
     """
-    if _is_consec_ch_in_direction("decr", A, p, q) and \
-        _is_consec_ch_in_direction("incr", A, q, r):
+    if _is_consec_ch_in_direction("decr", array, p, q) and \
+        _is_consec_ch_in_direction("incr", array, q, r):
         return True
     else:
         return False
@@ -42,13 +42,13 @@ def _is_pit(A, p, q, r):
 
 # tc: O(n)
 # sc: O(1)
-def _is_consec_ch_in_direction(direction, A, a, b):
+def _is_consec_ch_in_direction(direction, array, a, b):
     """
     Check whether the values in the array from item with index a to item with
     index b are consecutively changing in a given direction.
     """
-    m = A[a]
-    for n in A[a + 1:b + 1]:
+    m = array[a]
+    for n in array[a + 1:b + 1]:
         if direction == "incr":
             if n <= m:
                 return False
